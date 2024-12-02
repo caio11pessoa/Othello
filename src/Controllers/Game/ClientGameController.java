@@ -7,6 +7,9 @@ import java.net.InetSocketAddress;
 import java.nio.channels.*;
 import java.util.concurrent.*;
 
+import Models.Player;
+import Models.Turno;
+
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class ClientGameController {
@@ -53,6 +56,14 @@ public class ClientGameController {
                     int boardJ = Integer.parseInt(messageSplit[1]);
                     tabuleiroView.controller.clickCell(boardI, boardJ);
                     tabuleiroView.updateButtons();
+                    if (tabuleiroView.controller.turno == Turno.BRANCAS
+                            && tabuleiroView.controller.player == Player.Branca
+                            || tabuleiroView.controller.turno == Turno.PRETAS
+                                    && tabuleiroView.controller.player == Player.Preta) {
+                        tabuleiroView.setEnable();
+                    } else {
+                        tabuleiroView.setDisable();
+                    }
                 }
             } catch (IOException ex) {
                 ex.printStackTrace();
