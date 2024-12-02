@@ -8,23 +8,22 @@ import Controllers.Chat.ClientChatController;
 import Models.Player;
 
 public class ChatView {
-    ClientChatController controller = new ClientChatController();
-    public Player player;
+    ClientChatController controller ;
 
-    public static void main(String[] args) {
-        new ChatView().go();
+    public ChatView(Player player) {
+        controller = new ClientChatController(player);
     }
 
     public void go() {
         JScrollPane scroller = createScrollableTextArea();
         controller.outgoing = new JTextField(20); // Coloca o valor no outgoing
         JButton sendButton = new JButton("Send");
-        sendButton.addActionListener(e -> controller.sendMessage()); // chama o sendMessage
+        sendButton.addActionListener(e -> controller.sendMessage(controller.player)); // chama o sendMessage
         JPanel mainPanel = new JPanel();
         mainPanel.add(scroller);
         mainPanel.add(controller.outgoing);
         mainPanel.add(sendButton);
-        JFrame frame = new JFrame("chat: " + player);
+        JFrame frame = new JFrame("chat: " + controller.player);
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
         frame.setSize(400, 350);
         frame.setVisible(true);

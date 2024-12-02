@@ -24,8 +24,7 @@ public class ServerChatController {
             while (serverSocketChannel.isOpen()) {
                 SocketChannel clientSocket = serverSocketChannel.accept();
                 if (a == 0) {
-                    ChatView chatView = new ChatView();
-                    chatView.player = Player.Branca;
+                    ChatView chatView = new ChatView(Player.Branca);
                     chatView.go();
                     a++;
                     tabuleiro.setEnable();

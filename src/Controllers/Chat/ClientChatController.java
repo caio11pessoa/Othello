@@ -1,6 +1,9 @@
 package Controllers.Chat;
 
 import javax.swing.*;
+
+import Models.Player;
+
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.nio.channels.*;
@@ -13,8 +16,10 @@ public class ClientChatController {
     public JTextField outgoing;
     private BufferedReader reader;
     private PrintWriter writer;
+    public Player player;
 
-    public ClientChatController() {
+    public ClientChatController(Player player) {
+        this.player = player;
         setUpNetworking();
         ExecutorService executor = Executors.newSingleThreadExecutor();
         executor.execute(new IncomingReader());
@@ -32,8 +37,8 @@ public class ClientChatController {
         }
     }
 
-    public void sendMessage() {
-        writer.println(outgoing.getText());
+    public void sendMessage(Player player) {
+        writer.println(player + ": " + outgoing.getText());
         writer.flush();
         outgoing.setText("");
         outgoing.requestFocus();
@@ -44,7 +49,6 @@ public class ClientChatController {
             String message;
             try {
                 while ((message = reader.readLine()) != null) {
-                    System.out.println("read " + message);
                     incoming.append(message + "\n");
                 }
             } catch (IOException ex) {
