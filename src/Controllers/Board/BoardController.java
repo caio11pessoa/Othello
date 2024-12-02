@@ -17,12 +17,10 @@ public class BoardController {
         tabuleiro.addPossibiblePlayFrom(Turno.BRANCAS);
     }
 
-    public void escolherCelula(int i, int j) {
+    public void clickCell(int i, int j) {
         tabuleiro.tabCelulas[i][j] = turno == Turno.BRANCAS ? Celula.BRANCA : Celula.PRETA;
         tabuleiro.sanduichar(i, j, turno);
         turno = turno == Turno.BRANCAS ? Turno.PRETAS : Turno.BRANCAS;
-        if (player == Player.Branca && Turno.BRANCAS == turno) {
-            tabuleiro.addPossibiblePlayFrom(turno);
-        }
+        tabuleiro.addPossibiblePlayFrom(turno);
     }
 }

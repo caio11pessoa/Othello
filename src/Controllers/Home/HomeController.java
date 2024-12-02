@@ -32,7 +32,9 @@ public class HomeController {
     public void openClient(JFrame frame) {
         frame.dispose();
         new Thread(() -> {
-            new ChatView().go();
+            ChatView chatView = new ChatView();
+            chatView.player = Player.Preta;
+            chatView.go();
         }).start();
 
         BoardView tabuleiro = new BoardView(Player.Preta);

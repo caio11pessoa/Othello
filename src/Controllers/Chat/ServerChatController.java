@@ -1,10 +1,12 @@
 package Controllers.Chat;
+
 import java.io.*;
 import java.net.InetSocketAddress;
 import java.nio.channels.*;
 import java.util.*;
 import java.util.concurrent.*;
 
+import Models.Player;
 import Views.Board.BoardView;
 import Views.Chat.ChatView;
 
@@ -21,8 +23,10 @@ public class ServerChatController {
             int a = 0;
             while (serverSocketChannel.isOpen()) {
                 SocketChannel clientSocket = serverSocketChannel.accept();
-                if(a == 0){
-                    new ChatView().go(); // Iniciando o Chat somente uma vez
+                if (a == 0) {
+                    ChatView chatView = new ChatView();
+                    chatView.player = Player.Branca;
+                    chatView.go();
                     a++;
                     tabuleiro.setEnable();
                 }

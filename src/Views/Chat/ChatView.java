@@ -5,9 +5,11 @@ import java.awt.BorderLayout;
 import javax.swing.*;
 
 import Controllers.Chat.ClientChatController;
+import Models.Player;
 
 public class ChatView {
     ClientChatController controller = new ClientChatController();
+    public Player player;
 
     public static void main(String[] args) {
         new ChatView().go();
@@ -22,7 +24,7 @@ public class ChatView {
         mainPanel.add(scroller);
         mainPanel.add(controller.outgoing);
         mainPanel.add(sendButton);
-        JFrame frame = new JFrame("Ludicrously Simple Chat Client");
+        JFrame frame = new JFrame("chat: " + player);
         frame.getContentPane().add(BorderLayout.CENTER, mainPanel);
         frame.setSize(400, 350);
         frame.setVisible(true);

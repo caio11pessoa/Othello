@@ -7,8 +7,6 @@ import java.net.InetSocketAddress;
 import java.nio.channels.*;
 import java.util.concurrent.*;
 
-import Controllers.Board.BoardController;
-
 import static java.nio.charset.StandardCharsets.UTF_8;
 
 public class ClientGameController {
@@ -51,10 +49,9 @@ public class ClientGameController {
                     System.out.println("play " + message);
                     incoming = message;
                     String[] messageSplit = message.split("[,\\.\\s]");
-                    System.out.println("messageSplit: "+messageSplit[0]);
-                    int tabI = Integer.parseInt(messageSplit[0]);
-                    int tabJ = Integer.parseInt(messageSplit[1]);
-                    tabuleiroView.controller.escolherCelula(tabI, tabJ);
+                    int boardI = Integer.parseInt(messageSplit[0]);
+                    int boardJ = Integer.parseInt(messageSplit[1]);
+                    tabuleiroView.controller.clickCell(boardI, boardJ);
                     tabuleiroView.updateButtons();
                 }
             } catch (IOException ex) {
