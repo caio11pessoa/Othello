@@ -42,7 +42,7 @@ public class Tabuleiro {
                     while (k > 0) {
                         k -= 1;
                         Celula verifyCelula = tabCelulas[k][j];
-                        if (verifyCelula == null || verifyCelula == Celula.VAZIO) {
+                        if (verifyCelula == null || verifyCelula == Celula.VAZIO || verifyCelula == Celula.CLICAVEL) {
                             break;
                         } else if (verifyCelula == propriaCelula) {
                             int correDireitaIndex = i;
